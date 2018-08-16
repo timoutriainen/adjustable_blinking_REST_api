@@ -19,6 +19,9 @@ adjustable_blinking_REST_api>node .
 
 ### Make REST requests
 Use Postman or Insomnia to issue the below requests
+
 POST <your_server_ip>:3000/blink/start
+
 POST <your_server_ip>:3000/blink/stop
+
 GET <your_server_ip>:3000/blink
