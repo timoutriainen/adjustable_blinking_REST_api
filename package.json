@@ -1,0 +1,17 @@
+{
+  "name": "adjustable_blinking_restapi",
+  "version": "1.0.0",
+  "description": "adjust blinking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^6.5.2",
+    "restify": "^7.2.1",
+    "restify-errors": "^6.1.1",
+    "restify-plugins": "^1.6.0"
+  }
+}

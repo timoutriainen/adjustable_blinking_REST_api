@@ -1,0 +1,16 @@
+{
+    "title": "command",
+    "description": "issue commands to control led",
+    "type": "object",
+    "properties": {
+        "command": {
+            "type": "string",
+            "description": "command to be issued"
+        },
+        "parameter": {
+            "type": "string",
+            "description": "parameter for the command"
+        }
+    },
+    "required": ["command", "parameter"]
+}
