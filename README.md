@@ -12,6 +12,9 @@ git clone https://github.com/timoutriainen/adjustable_blinking_REST_api adjustab
 ### Do npm install
 adjustable_blinking_REST_api>npm install
 
+### Install the driver
+https://github.com/timoutriainen/adjustable_blinking
+
 ## Usage
 
 ### Run API
