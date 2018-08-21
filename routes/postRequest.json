@@ -1,6 +1,6 @@
 {
     "title": "delay",
-    "description": "change the delay of the LED blinking",
+    "description": "issue commands to control led",
     "type": "object",
     "properties": {
         "value": {

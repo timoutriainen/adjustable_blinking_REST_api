@@ -27,4 +27,11 @@ POST <your_server_ip>:3000/blink/start
 
 POST <your_server_ip>:3000/blink/stop
 
-GET <your_server_ip>:3000/blink
+POST <your_server_ip>:3000/blink/delay 
+
+Provide new delay value in the request body in application/json format:
+{
+	"value": 1000
+}
+
+GET <your_server_ip>:3000/blink/delay
