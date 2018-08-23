@@ -5,9 +5,6 @@ const Ajv = require('ajv');
 const ajv = new Ajv({allErrors: true});
 const postSchema = require('../validators/postRequest');
 ajv.addSchema(postSchema, 'postSchema');
-/*var validate = ajv.compile(schema);
-var valid = validate(data);
-if (!valid) console.log(validate.errors);*/
 
 function errorResponse(schemaErrors) {
   let errors = schemaErrors.map((error) => {
@@ -30,7 +27,9 @@ const validatePostDelayParams = function(req, res, next) {
 const validatePostParams = function(schema, req, res, next) {
     console.log("validatePostParams()");
     const status = ajv.validate(schema, req.params);
-    console.log(ajv.errors);
+    if(ajv.errors) {
+        console.log(ajv.errors);
+    }
     if(!status) {
         console.log("validatePostParams() - nok");
         return res.send(errorResponse(ajv.errors));
@@ -49,10 +48,10 @@ const handleGetDelayRequest = function(req, res, next) {
 
 const handlePostDelayRequest = function(req, res, next) {
     console.log("handlePostDelayRequest()");
-    const {value} = req.params;
-    console.log(value);
+    const { value } = req.params;
+    console.log('new delay: ' + value);
     fs.writeFileSync("/sys/class/ledclass/led03/led_attr", value);
-    res.send(200);
+    res.json({delay: value});
     return next();
 };
 
