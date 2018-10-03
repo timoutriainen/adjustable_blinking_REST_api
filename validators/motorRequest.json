@@ -1,0 +1,14 @@
+{
+    "title": "delay",
+    "description": "change the delay of the LED blinking",
+    "type": "object",
+    "properties": {
+        "value": {
+            "type": "integer",
+            "description": "new delay value for the command delay",
+            "minimum": 50,
+            "maximum": 1000
+        }
+    },
+    "required": ["value"]
+}
