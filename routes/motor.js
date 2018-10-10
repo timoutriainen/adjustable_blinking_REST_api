@@ -2,6 +2,11 @@
 const fs = require('fs');
 const Ajv = require('ajv');
 const postSchema = require('../validators/motorRequest');
+const Pwm = require('../services/pwm');
+const Gpio = require('pigpio').Gpio;
+const led = new Gpio(4, {mode: Gpio.OUTPUT});
+
+const pwm = Pwm.create(led);
 
 const ajv = new Ajv({ allErrors: true });
 ajv.addSchema(postSchema, 'postSchema');
@@ -46,24 +51,24 @@ const validatePostSpeedParams = (req, res, next) => {
   return validatePostParams(postSchema, req, res, next);
 };
 
-const handleGetDirectionRequest = (req, res, next) => {
-  traceLog('handleGetDirectionRequest()');
-  const data = fs.readFileSync('/sys/class/ledclass/led03/led_attr', 'UTF-8');
-  traceLog(data);
-  res.json({ delay: Number(data.split('\n')[0]) });
+const handleGetRotationRequest = (req, res, next) => {
+  traceLog('handleGetRotationRequest()');
+  const rotationDirection = pwm.getRotation();
+  traceLog(`rotation: ${rotationDirection}`);
+  res.json({ rotation: rotationDirection });
   return next();
 };
 
 const handleGetSpeedRequest = (req, res, next) => {
   traceLog('handleGetSpeedRequest()');
-  const data = fs.readFileSync('/sys/class/ledclass/led03/led_attr', 'UTF-8');
-  traceLog(data);
-  res.json({ delay: Number(data.split('\n')[0]) });
+  const newSpeed = pwm.getSpeed();
+  traceLog(newSpeed);
+  res.json({ speed: newSpeed });
   return next();
 };
 
-const handlePostDirectionRequest = (req, res, next) => {
-  traceLog('handlePostDirectionRequest()');
+const handlePostRotationRequest = (req, res, next) => {
+  traceLog('handlePostRotationRequest()');
   const { value } = req.params;
   traceLog(`new delay: ${value}`);
   fs.writeFileSync('/sys/class/ledclass/led03/led_attr', value);
@@ -73,18 +78,19 @@ const handlePostDirectionRequest = (req, res, next) => {
 
 const handlePostSpeedRequest = (req, res, next) => {
   traceLog('handlePostSpeedRequest()');
-  fs.writeFileSync('/sys/class/ledclass/led03/led_attr', 'on');
+  const { speed } = req.params;
+  pwm.setSpeed(speed)
   res.send(200);
   return next();
 };
 
 module.exports = (server) => {
-  server.post('/motor/direction',
+  server.post('/motor/rotation',
     validatePostDirectionParams,
-    handlePostDirectionRequest);
+    handlePostRotationRequest);
 
-  server.get('/motor/direction',
-    handleGetDirectionRequest);
+  server.get('/motor/rotation',
+    handleGetRotationRequest);
 
   server.post('/motor/speed',
     validatePostSpeedParams,

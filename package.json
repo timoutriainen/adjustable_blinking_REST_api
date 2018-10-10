@@ -4,19 +4,24 @@
   "description": "adjust blinking",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test:repl": "mocha debug"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "ajv": "^6.5.2",
+    "debug": "^4.1.0",
+    "pigpio": "^1.1.3",
     "restify": "^7.2.1",
     "restify-errors": "^6.1.1",
     "restify-plugins": "^1.6.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
   }
 }

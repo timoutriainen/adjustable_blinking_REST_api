@@ -1,14 +1,14 @@
 {
-    "title": "delay",
-    "description": "change the delay of the LED blinking",
+    "title": "speed",
+    "description": "change the speed of the rotating motor",
     "type": "object",
     "properties": {
-        "value": {
+        "speed": {
             "type": "integer",
-            "description": "new delay value for the command delay",
-            "minimum": 50,
-            "maximum": 1000
+            "description": "new speed value for the command speed",
+            "minimum": 0,
+            "maximum": 255
         }
     },
-    "required": ["value"]
+    "required": ["speed"]
 }
