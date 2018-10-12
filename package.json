@@ -4,7 +4,7 @@
   "description": "adjust blinking",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha --timeout=3000",
     "test:repl": "mocha debug"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1"
   }
 }

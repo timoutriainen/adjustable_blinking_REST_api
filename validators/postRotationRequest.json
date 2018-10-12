@@ -1,0 +1,13 @@
+{
+    "title": "rotation direction post",
+    "description": "set the rotation direction of the rotating motor",
+    "type": "object",
+    "properties": {
+        "rotation": {
+            "type": "string",
+            "description": "new rotation direction",
+            "enum": [ "left", "right" ]
+        }
+    },
+    "required": ["rotation"]
+}
