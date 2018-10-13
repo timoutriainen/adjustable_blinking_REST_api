@@ -6,7 +6,7 @@
         "rotation": {
             "type": "string",
             "description": "new rotation direction",
-            "enum": [ "left", "right" ]
+            "enum": [ "none", "left", "right" ]
         }
     },
     "required": ["rotation"]

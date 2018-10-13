@@ -25,8 +25,8 @@ describe('MotorApi#Rotation', function(){
     beforeEach(function(){
         motor = MotorApi.create(fakeIo);
     });
-    it('should be stopped initially', function(){
-        assert(motor.getRotation() === 'none', 'rotation is initially stopped');
+    it('should be none initially', function(){
+        assert(motor.getRotation() === 'none', 'rotation is initially none');
     });
     it('should change to left when set', function(){
         motor.setRotation('left');
@@ -41,6 +41,11 @@ describe('MotorApi#Rotation', function(){
         motor.setRotation('foobar');
         assert(motor.getRotation() === 'right', 'rotation is right');
     });
+    it('should change to none when set', function(){
+        motor.setRotation('right');
+        motor.setRotation('none');
+        assert(motor.getRotation() === 'none', 'rotation is none');
+    });
 })
 
 describe('MotorApi#Speed', function(){
@@ -48,20 +53,20 @@ describe('MotorApi#Speed', function(){
         motor = MotorApi.create(fakeIo);
     });
     it('should be zero initially', function(){
-        assert(motor.getSpeed() == 0, 'speed is initially zero');
+        assert(motor.getSpeed() === 0, 'speed is initially zero');
     });
     it('should change to 100 when set', function(){
         motor.setSpeed(100);
-        assert(motor.getSpeed() == 100, 'speed is 100');
+        assert(motor.getSpeed() === 100, 'speed is 100');
     });
     it('should not change to invalid value 256 when set', function(){
         motor.setSpeed(100);
         motor.setSpeed(256);
-        assert(motor.getSpeed() == 100, 'speed is 100');
+        assert(motor.getSpeed() === 100, 'speed is 100');
     });
     it('should not change to invalid value -1 when set', function(){
         motor.setSpeed(100);
         motor.setSpeed(-1);
-        assert(motor.getSpeed() == 100, 'speed is 100');
+        assert(motor.getSpeed() === 100, 'speed is 100');
     });
 })

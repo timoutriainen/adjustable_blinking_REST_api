@@ -1,7 +1,7 @@
 const debug = require('debug')('motor-api');
 
-const LEFT = 'left';
-const RIGHT = 'right';
+const ROTATION_LEFT = 'left';
+const ROTATION_RIGHT = 'right';
 const ROTATION_NONE = 'none';
 const SPEED_ZERO = 0;
 
@@ -38,29 +38,31 @@ const setRotationToNone = function() {
 
 const setRotationToLeft = function() {
     debug('setRotationToLeft()');
-    rotation = LEFT;
+    rotation = ROTATION_LEFT;
     dependencies.right.digitalWrite(0);
     dependencies.left.digitalWrite(1);
 }
 
 const setRotationToRight = function() {
     debug('setRotationToRight()');
-    rotation = RIGHT;
+    rotation = ROTATION_RIGHT;
     dependencies.left.digitalWrite(0);
     dependencies.right.digitalWrite(1);
 }
 
 MotorApi.prototype.setRotation = function(rotation) {
     debug(`setRotation(${rotation})`);
-    if (rotation !== LEFT && rotation !== RIGHT) {
+    if (rotation !== ROTATION_LEFT && rotation !== ROTATION_RIGHT & rotation !== ROTATION_NONE) {
         debug('invalid rotation value');
         return;
     }
-    if (rotation === LEFT) {
-        setRotationToLeft();
-    } else {
-        setRotationToRight();
+    if (rotation === ROTATION_LEFT) {
+        return setRotationToLeft();
     }
+    if (rotation === ROTATION_RIGHT) {
+        return setRotationToRight();
+    }
+    setRotationToNone();
 }
 
 MotorApi.prototype.getRotation = function() {
