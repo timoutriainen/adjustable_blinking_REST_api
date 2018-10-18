@@ -9,21 +9,21 @@ let dependencies;
 let speed;
 let rotation;
 
-const setRotationToNone = function () {
+const setRotationToNone = () => {
   debug('setRotationToNone()');
   rotation = ROTATION_NONE;
   dependencies.right.digitalWrite(0);
   dependencies.left.digitalWrite(0);
 };
 
-const setRotationToLeft = function () {
+const setRotationToLeft = () => {
   debug('setRotationToLeft()');
   rotation = ROTATION_LEFT;
   dependencies.right.digitalWrite(0);
   dependencies.left.digitalWrite(1);
 };
 
-const setRotationToRight = function () {
+const setRotationToRight = () => {
   debug('setRotationToRight()');
   rotation = ROTATION_RIGHT;
   dependencies.left.digitalWrite(0);
@@ -37,20 +37,21 @@ function MotorApi(motorIo) {
   setRotationToNone();
 }
 
-MotorApi.prototype.getSpeed = function () {
+MotorApi.prototype.getSpeed = function getSpeed() {
   return speed;
 };
 
-MotorApi.prototype.setSpeed = function (newSpeed) {
+MotorApi.prototype.setSpeed = (newSpeed) => {
   if (newSpeed > 255 || newSpeed < 0) {
     debug(`invalid speed ${newSpeed}`);
     return;
   }
+  debug(`setSpeed(${newSpeed})`);
   speed = newSpeed;
   dependencies.led.pwmWrite(speed);
 };
 
-MotorApi.prototype.setRotation = function (newRotation) {
+MotorApi.prototype.setRotation = (newRotation) => {
   debug(`setRotation(${newRotation})`);
   if (newRotation !== ROTATION_LEFT
     && newRotation !== ROTATION_RIGHT
@@ -59,15 +60,17 @@ MotorApi.prototype.setRotation = function (newRotation) {
     return;
   }
   if (newRotation === ROTATION_LEFT) {
-    return setRotationToLeft();
+    setRotationToLeft();
+    return;
   }
   if (newRotation === ROTATION_RIGHT) {
-    return setRotationToRight();
+    setRotationToRight();
+    return;
   }
   setRotationToNone();
 };
 
-MotorApi.prototype.getRotation = function () {
+MotorApi.prototype.getRotation = function getRotation() {
   return rotation;
 };
 

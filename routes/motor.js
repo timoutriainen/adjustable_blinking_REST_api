@@ -1,6 +1,6 @@
 const Ajv = require('ajv');
-const Gpio = require('pigpio').Gpio;
-const debug = require('debug')('pwm');
+const { Gpio } = require('pigpio');
+const debug = require('debug')('motor');
 const postSpeedReqSchema = require('../validators/postSpeedRequest');
 const postRotationReqSchema = require('../validators/postRotationRequest');
 const MotorApi = require('../services/motor-api');
@@ -78,7 +78,7 @@ const handleGetSpeedRequest = (req, res, next) => {
 const handlePostSpeedRequest = (req, res, next) => {
   debug('handlePostSpeedRequest()');
   const { speed } = req.params;
-  pwm.setSpeed(speed)
+  pwm.setSpeed(speed);
   res.json({ speed });
   return next();
 };
